@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game RTC</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <h1>Snake RTC 🐍</h1>
+      <div class="row">
+        <input id="room" placeholder="room-id (bebas)" />
+        <button id="joinBtn">Join Room</button>
+      </div>
+      <div class="status">
+        <div>Role: <span id="role">-</span></div>
+        <div>Signaling: <span id="sig">Disconnected</span></div>
+        <div>WebRTC: <span id="rtc">Idle</span></div>
+        <div>Channel: <span id="dc">Closed</span></div>
+      </div>
+      <p class="hint">
+        Controls: <b>W/A/S/D</b> atau <b>Arrow Keys</b>. Host = Player 1
+        (hijau), Guest = Player 2 (biru).
+      </p>
+    </div>
+
+    <canvas id="game" width="900" height="600"></canvas>
+
+    <script src="main.js"></script>
+  </body>
+</html>
