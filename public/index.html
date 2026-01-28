@@ -8,24 +8,38 @@
   </head>
   <body>
     <div class="panel">
-      <h1>Snake RTC 🐍</h1>
+      <h1>Snake RTC</h1>
       <div class="row">
         <input id="room" placeholder="room-id (bebas)" />
         <button id="joinBtn">Join Room</button>
+      </div>
+      <div class="row actions">
+        <button id="startBtn" disabled>Mulai</button>
+        <button id="leaveBtn" disabled>Leave</button>
       </div>
       <div class="status">
         <div>Role: <span id="role">-</span></div>
         <div>Signaling: <span id="sig">Disconnected</span></div>
         <div>WebRTC: <span id="rtc">Idle</span></div>
         <div>Channel: <span id="dc">Closed</span></div>
+        <div>Players: <span id="players">0/4</span></div>
       </div>
       <p class="hint">
         Controls: <b>W/A/S/D</b> atau <b>Arrow Keys</b>. Host = Player 1
-        (hijau), Guest = Player 2 (biru).
+        (hijau). Player 2-4 = tamu. Host tekan Mulai jika pemain minimal 2.
+        Shortcut: <b>Enter</b> Join/Mulai/Hidup/OK (sesuai kondisi),
+        <b>Esc</b> Leave.
       </p>
     </div>
 
     <canvas id="game" width="900" height="600"></canvas>
+
+    <div id="popup" class="popup hidden">
+      <div class="popup-card">
+        <div id="popupText"></div>
+        <button id="popupBtn">OK</button>
+      </div>
+    </div>
 
     <script src="main.js"></script>
   </body>

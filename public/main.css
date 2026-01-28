@@ -26,6 +26,9 @@ h1 {
   gap: 8px;
   margin-bottom: 8px;
 }
+.row.actions {
+  justify-content: flex-end;
+}
 #room {
   flex: 1;
   padding: 10px 12px;
@@ -45,9 +48,41 @@ h1 {
 #joinBtn:hover {
   filter: brightness(1.1);
 }
+#joinBtn:disabled {
+  background: #2a2d3a;
+  color: #a0a0a0;
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+#startBtn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 0;
+  background: #2bd47f;
+  color: #0e0f14;
+  font-weight: 700;
+  cursor: pointer;
+}
+#startBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+#leaveBtn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 0;
+  background: #ff5c5c;
+  color: #0e0f14;
+  font-weight: 700;
+  cursor: pointer;
+}
+#leaveBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 .status {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 6px;
   margin-top: 8px;
 }
@@ -63,4 +98,34 @@ canvas#game {
   background: #0a0b10;
   border: 1px solid #2a2d3a;
   border-radius: 12px;
+}
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.popup.hidden {
+  display: none;
+}
+.popup-card {
+  width: min(420px, 90vw);
+  background: #161821;
+  border: 1px solid #2a2d3a;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+#popupBtn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 0;
+  background: #4f7cff;
+  color: white;
+  cursor: pointer;
 }
