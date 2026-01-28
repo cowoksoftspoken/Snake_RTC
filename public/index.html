@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snake Game RTC</title>
     <link rel="stylesheet" href="main.css" />
+    <link
+      rel="icon"
+      href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx0ZiFAuP-Apl_sH5x-nFDRVfxcZet7YkkdQ&s"
+    />
   </head>
   <body>
     <div class="panel">
       <h1>Snake RTC</h1>
       <div class="row">
+        <input id="username" placeholder="username (bebas)" maxlength="16" />
         <input id="room" placeholder="room-id (bebas)" />
         <button id="joinBtn">Join Room</button>
       </div>
@@ -23,12 +28,21 @@
         <div>WebRTC: <span id="rtc">Idle</span></div>
         <div>Channel: <span id="dc">Closed</span></div>
         <div>Players: <span id="players">0/4</span></div>
+        <div>Nama: <span id="names">-</span></div>
+        <div>Skill: <span id="skills">-</span></div>
+        <div>Cooldown: <span id="cooldowns">-</span></div>
+      </div>
+      <div class="leaderboard">
+        <div class="leaderboard-title">Leaderboard (Menang Tertinggi)</div>
+        <div id="leaderboard">-</div>
       </div>
       <p class="hint">
         Controls: <b>W/A/S/D</b> atau <b>Arrow Keys</b>. Host = Player 1
         (hijau). Player 2-4 = tamu. Host tekan Mulai jika pemain minimal 2.
-        Shortcut: <b>Enter</b> Join/Mulai/Hidup/OK (sesuai kondisi),
-        <b>Esc</b> Leave.
+        Skill: <b>Shift</b> (P1 Shield, P2 Ghost, P3 Blink, P4 Grow). Respawn
+        host: <b>R</b> saat game selesai. Shortcut:
+        <b>Enter</b> Join/Mulai/Hidup/OK (sesuai kondisi), <b>Esc</b> Leave
+        (jika game tidak berjalan).
       </p>
     </div>
 

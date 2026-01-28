@@ -10,11 +10,18 @@ const wss = new WebSocket.Server({ server });
 app.use(express.static(path.join(__dirname, "public")));
 
 const MAX_PLAYERS = 4;
+const MAX_NAME_LEN = 16;
 const rooms = new Map();
 let nextId = 1;
 
 function send(ws, msg) {
   if (ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(msg));
+}
+
+function normalizeName(value, fallback) {
+  if (typeof value !== "string") return fallback;
+  const cleaned = value.trim().replace(/\s+/g, " ").slice(0, MAX_NAME_LEN);
+  return cleaned || fallback;
 }
 
 function getRoom(roomId) {
@@ -37,6 +44,11 @@ function broadcastRoomUpdate(room) {
     count: room.clients.size,
     max: MAX_PLAYERS,
     slots: room.slots.map((id) => Boolean(id)),
+    names: room.slots.map((id, idx) => {
+      if (!id) return null;
+      const client = room.clients.get(id);
+      return client && client.name ? client.name : `Player ${idx + 1}`;
+    }),
   };
   for (const client of room.clients.values()) send(client, payload);
 }
@@ -119,6 +131,8 @@ wss.on("connection", (ws) => {
         return send(ws, { type: "room_full", max: MAX_PLAYERS });
       }
 
+      const fallbackName = `Player ${slotIndex + 1}`;
+      ws.name = normalizeName(data.name, fallbackName);
       room.clients.set(ws.id, ws);
       room.slots[slotIndex] = ws.id;
       ws.roomId = roomId;
@@ -131,13 +145,21 @@ wss.on("connection", (ws) => {
         role: isHost ? "host" : "guest",
         playerIndex: slotIndex,
         hostId: room.hostId,
+        name: ws.name,
       });
 
       broadcastRoomUpdate(room);
 
       if (!isHost) {
         const host = room.clients.get(room.hostId);
-        if (host) send(host, { type: "peer_joined", id: ws.id, playerIndex: slotIndex });
+        if (host) {
+          send(host, {
+            type: "peer_joined",
+            id: ws.id,
+            playerIndex: slotIndex,
+            name: ws.name,
+          });
+        }
       }
       return;
     }
